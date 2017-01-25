@@ -7,6 +7,7 @@ export function func1(mesh, settings) {
 
     var s = Math.abs(Math.sin(rel_y * height / 2));
     s = s * (height - abs_y);
+    s += 
     
     mesh.scale.set(s, 1.0, s);
     mesh.position.set(0, abs_y, 0);
@@ -48,10 +49,12 @@ export function func4(mesh, settings) {
     var frequency = settings.frequency;
     var amplitude = settings.amplitude;
 
-    mesh.position.set(0, abs_y, 0);
+    var sawtooth = rel_y * frequency - Math.floor(rel_y * frequency) * amplitude;
+    var s = sawtooth + rel_y * rel_y * 50;
+
+    mesh.scale.set(s, 1.0, s);
+    mesh.position.set(0, height- abs_y, 0);
 }
-
-
 
 export function sawtooth(mesh, settings) {
     var abs_y = settings.pos;
@@ -60,11 +63,16 @@ export function sawtooth(mesh, settings) {
     var frequency = settings.frequency;
     var amplitude = settings.amplitude;
 
-    var sawtooth = rel_y * frequency - Math.floor(rel_y * frequency) * amplitude;
+    var y = height - abs_y;
+    var sawtooth = (y * frequency - Math.floor(y * frequency)) * amplitude;
 
     mesh.scale.set(sawtooth, 1.0, sawtooth);
     mesh.position.set(0, abs_y, 0);
 }
+
+// function sw(x, freq, amplitude) {
+//     return x * freq - Math.floor(x * freq) * amplitude;
+// }
 
 export function triangle(mesh, settings) {
     var abs_y = settings.pos;
@@ -90,6 +98,6 @@ export function step(mesh, settings) {
         s = amplitude * 0.50;
     }
 
-    mesh.scale.set(step, 1.0, step);
+    mesh.scale.set(s, 1.0, s);
     mesh.position.set(0, abs_y, 0);
 }

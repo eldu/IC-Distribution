@@ -63,13 +63,13 @@ function onLoad(framework) {
         amplitude: settings.amplitude
       };
 
-      // step(mesh, params);
+      //step(mesh, params);
       //triangle(mesh, params);
-      // sawtooth(mesh, params);
-      func1(mesh, params);
+      sawtooth(mesh, params);
+      //func1(mesh, params);
       //func2(mesh, params);
       //func3(mesh, params);
-      // func4(mesh, params);
+      //func4(mesh, params);
       
       scene.add(mesh);
       tree_items.push(mesh);
@@ -80,7 +80,7 @@ function onLoad(framework) {
   // more information here: https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage
   gui.add(settings, 'treeHeight', 0.1, 100).onChange(buildTree);
   gui.add(settings, 'leafHeight', 0.1, 1).onChange(buildTree);
-  gui.add(settings, 'frequency', 1, 100).onChange(buildTree);
+  gui.add(settings, 'frequency', 0.0, 100.0).onChange(buildTree);
   gui.add(settings, 'amplitude', 0.0, 30.0).onChange(buildTree);
 
   buildTree();
