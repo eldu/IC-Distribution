@@ -2,7 +2,7 @@
 const THREE = require('three'); // older modules are imported like this. You shouldn't have to worry about this much
 import Framework from './framework'
 
-import {func1, func2, func3, func4} from './distribution'
+import {func1, func2, func3, func4, sawtooth, triangle, step} from './distribution'
 
 // called after the scene loads
 function onLoad(framework) {
@@ -39,7 +39,9 @@ function onLoad(framework) {
 
   var settings = {
     treeHeight: 50,
-    leafHeight: 0.1
+    leafHeight: 0.1,
+    frequency: 10.0,
+    amplitude: 5.0
   }
 
   var tree_items = [];
@@ -56,13 +58,18 @@ function onLoad(framework) {
         min: 0,
         max: settings.treeHeight,
         pos: i,
-        size: settings.leafHeight
+        size: settings.leafHeight,
+        frequency: settings.frequency,
+        amplitude: settings.amplitude
       };
 
+      // step(mesh, params);
+      //triangle(mesh, params);
+      // sawtooth(mesh, params);
       func1(mesh, params);
-      // func2(mesh, settings);
-      // func3(mesh, settings);
-      // func4(mesh, settings);
+      //func2(mesh, params);
+      //func3(mesh, params);
+      // func4(mesh, params);
       
       scene.add(mesh);
       tree_items.push(mesh);
@@ -73,6 +80,8 @@ function onLoad(framework) {
   // more information here: https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage
   gui.add(settings, 'treeHeight', 0.1, 100).onChange(buildTree);
   gui.add(settings, 'leafHeight', 0.1, 1).onChange(buildTree);
+  gui.add(settings, 'frequency', 1, 100).onChange(buildTree);
+  gui.add(settings, 'amplitude', 0.0, 30.0).onChange(buildTree);
 
   buildTree();
 }
